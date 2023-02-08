@@ -3,11 +3,8 @@ import { HttpExceptionFilter } from '../common/excepections/http-exception.filte
 import { CatsService } from './cats.service';
 import {
   Controller,
-  Delete,
+  Body,
   Get,
-  Param,
-  ParseIntPipe,
-  Patch,
   Post,
   Put,
   UseFilters,
@@ -21,35 +18,27 @@ export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
   @Get()
-  getAllCat() {
-    console.log('hello controller');
-    return { cats: 'get all cat api' };
-  }
-
-  @Get(':id')
-  getOneCat(@Param('id', ParseIntPipe) param: number) {
-    console.log(param);
-    console.log(typeof param);
-    return 'one cat';
+  getCurrentCat() {
+    return 'current cat';
   }
 
   @Post()
-  createCat() {
-    return 'create cat';
+  async signUp() {
+    return 'signup';
   }
 
-  @Put(':id')
-  updateCat() {
-    return 'update cat';
+  @Post('login')
+  logIn() {
+    return 'login';
   }
 
-  @Patch(':id')
-  updatePartialCat() {
-    return 'update';
+  @Post('logout')
+  logOut() {
+    return 'logout';
   }
 
-  @Delete(':id')
-  deleteCat() {
-    return 'delete cat';
+  @Post('uploads/cats')
+  uploadCatImg() {
+    return 'uploadImg';
   }
 }
