@@ -1,4 +1,3 @@
-import { AuthService } from '../../auth/auth.service';
 import { CatsRepository } from '../cats.repository';
 import { CatRequestDto } from '../dto/cats.request.dto';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
@@ -8,6 +7,12 @@ import { Cat } from '../cats.schema';
 @Injectable()
 export class CatsService {
   constructor(private readonly catsRepository: CatsRepository) {}
+
+  async getAllCat() {
+    const allCat = await this.catsRepository.findAll();
+    const readOnlyCats = allCat.map((cat) => cat.readOnlyData);
+    return readOnlyCats;
+  }
 
   async signUp(body: CatRequestDto) {
     const { email, name, password } = body;
